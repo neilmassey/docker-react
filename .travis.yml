@@ -4,16 +4,14 @@ services:
   - docker
 
 before_install:
-  - docker build -t neilmassey/docker-react -f Dockerfile.dev .
+  - docker build -t neilmassey/docker-react -f frontend/Dockerfile.dev .
 
 script:
   - docker run -e CI=true neilmassey/docker-react npm run test
 
 deploy:
   provider: elasticbeanstalk
-  region:
-    "eu-west-2"
-    # region: "eu-west-2"
+  region: "eu-west-2"
   app: "docker-react"
   env: "DockerReact-env"
   bucket_name: "elasticbeanstalk-eu-west-2-851563891549"
